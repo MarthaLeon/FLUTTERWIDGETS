@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Demo de Widgets',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: WidgetsPage(),
+    );
+  }
+}
+
+class WidgetsPage extends StatefulWidget {
+  @override
+  _WidgetsPageState createState() => _WidgetsPageState();
+}
+
+class _WidgetsPageState extends State<WidgetsPage> {
+  String userInput = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Widgets en Flutter')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Hola, este es un texto simple.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            SizedBox(height: 20),
+            Image.network('https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png', height: 100),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(labelText: 'Escribe algo...', border: OutlineInputBorder()),
+              onChanged: (value) {
+                setState(() {
+                  userInput = value;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Texto ingresado: \$userInput')));
+              },
+              child: Text('Mostrar texto'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Texto ingresado: \$userInput')));
+              },
+              child: Text('Fuentes de consulta acerca de Flutter'),
+            ),
+            SizedBox(height: 20),
+            Text('En estas páginas encontrarás fuentes de consulta para usar Flutter', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            Image.network('data:image/png;base64,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', height: 100),
+            SizedBox(height: 20),
+            Image.network('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAllBMVEVHcEz/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RQD/RgD/RQD+////RQD/PAD/NQD+QgDP3+fb6e7n8PLx9vcKEhX0/f/L1tz+jXL718/+XCr4+vv0e1/olIP6pJDi3N3PqqbfNAn7cU//VgP+9vQyODv1bEb+49rdzc3/v66xu77IXlHlXDhqcHKsLABrLBlRGkQ3AAAADnRSTlMAwkSK1tA47GYdh31HPrF7ujQAAAF5SURBVCiRbZOHcoMwDIahyYUkbW3Z2GbvlT3e/+UqQSCkiY4D5A9bvwaWNdpqYTucO/ZiZf23NYLRnPUL2iyfiEvJl5sn+5khLuJacP41sq85gyNje5joZs7kLWCMhUiHk+fxKu9+YswnuOx1zvd5FZRKHYAc0jzlIAFudwCoU9RLGWHuJEIIABHnx7I85jE6eOHyylqg+DCKwnDPHrYPycd0tpbNIWcfLAduU8hPjDEKymXs07spi2GxKA09/FhyCwNrkzB2FruEFpMqPtO3GgEeC5lKmK4aGRGMRFNplqgM8Fgb1eZ+4l8a3hJseXNBN0e1NqUid9oYE7VDzDYyiTE7San0RSi0Nv6p6zyv606+0boYikC5QOoqpZXXm9JaqRT68vWFh8x1XRVcPe8aKHzN4FH4vmUiDdwgwP10D1JUM7RsaDbw7FDgHrc4ZLzv2GOMfof5gLhO0zoG6Bs2DtH3NHYgh1a+s5lNo7l+Q7OhfoWOvX3+Dn+Ini8glo+XBwAAAABJRU5ErkJggg==', height: 100),
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
